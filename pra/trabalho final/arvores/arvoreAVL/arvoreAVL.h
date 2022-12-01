@@ -7,23 +7,23 @@ typedef struct no {
     int valor;
 } No;
 
-typedef struct arvore {
+typedef struct arvoreAVL {
     struct no* raiz;
-} Arvore;
+} ArvoreAVL;
 
-Arvore* criar();
-int vazia(Arvore* arvore);
+ArvoreAVL* criar();
+int vazia(ArvoreAVL* arvoreAVL);
 No* adicionarNo(No* no, int valor);
-No* adicionar(Arvore* arvore, int valor);
+int adicionar(ArvoreAVL* arvoreAVL, int valor);
 No* localizar(No* no, int valor);
 void percorrerProfundidadeInOrder(No* no, void (*callback)(int));
 void percorrerProfundidadePreOrder(No* no, void (*callback)(int));
 void percorrerProfundidadePosOrder(No* no, void (callback)(int));
 void visitar(int valor);
-void balanceamento(Arvore*, No*);
+void balanceamento(ArvoreAVL*, No*);
 int altura(No*);
 int fb(No*);
-No* rsd(Arvore*, No*);
-No* rse(Arvore*, No*);
-No* rdd(Arvore*, No*);
-No* rde(Arvore*, No*);
+No* rsd(ArvoreAVL*, No*);
+No* rse(ArvoreAVL*, No*);
+No* rdd(ArvoreAVL*, No*);
+No* rde(ArvoreAVL*, No*);

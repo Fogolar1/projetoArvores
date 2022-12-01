@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include "arvoreAVL.h"
 
-Arvore* criar() {
-    Arvore *arvore = malloc(sizeof(Arvore));
-    arvore->raiz = NULL;
+ArvoreAVL* criar() {
+    ArvoreAVL *arvoreAVL = malloc(sizeof(ArvoreAVL));
+    arvoreAVL->raiz = NULL;
   
-    return arvore;
+    return arvoreAVL;
 }
 
-int vazia(Arvore* arvore) {
-    return arvore->raiz == NULL;
+int vazia(ArvoreAVL* arvoreAVL) {
+    return arvoreAVL->raiz == NULL;
 }
 
 No* adicionarNo(No* no, int valor) {
@@ -43,22 +43,20 @@ No* adicionarNo(No* no, int valor) {
     }
 }
 
-No* adicionar(Arvore* arvore, int valor) {
+int adicionar(ArvoreAVL* arvoreAVL, int valor) {
     contadora++;
-    if (arvore->raiz == NULL) {
+    if (arvoreAVL->raiz == NULL) {
         printf("Adicionando %d\n",valor);
         No* novo = malloc(sizeof(No));
         novo->valor = valor;
         
-        arvore->raiz = novo;
-			
-        return novo;
+        arvoreAVL->raiz = novo;
     } else {
-        No* no = adicionarNo(arvore->raiz, valor);
-        balanceamento(arvore, no);
-        
-        return no;
+        No* no = adicionarNo(arvoreAVL->raiz, valor);
+        balanceamento(arvoreAVL, no);
     }
+
+    return contadora;
 }
 
 
@@ -108,7 +106,7 @@ void visitar(int valor){
     printf("%d ", valor);
 }
 
-void balanceamento(Arvore* arvore, No* no) {
+void balanceamento(ArvoreAVL* arvoreAVL, No* no) {
     while (no != NULL) {
         contadora++;
         int fator = fb(no);
@@ -117,19 +115,19 @@ void balanceamento(Arvore* arvore, No* no) {
             //rotação para a direita
             if (fb(no->esquerda) > 0) {
                 printf("RSD(%d)\n",no->valor);
-                rsd(arvore, no); //rotação simples a direita, pois o FB do filho tem sinal igual
+                rsd(arvoreAVL, no); //rotação simples a direita, pois o FB do filho tem sinal igual
             } else {
                 printf("RDD(%d)\n",no->valor);
-                rdd(arvore, no); //rotação dupla a direita, pois o FB do filho tem sinal diferente
+                rdd(arvoreAVL, no); //rotação dupla a direita, pois o FB do filho tem sinal diferente
             }
         } else if (fator < -1) { //árvore mais pesada para a direita
             //rotação para a esquerda
             if (fb(no->direita) < 0) {
                 printf("RSE(%d)\n",no->valor);
-                rse(arvore, no); //rotação simples a esquerda, pois o FB do filho tem sinal igual
+                rse(arvoreAVL, no); //rotação simples a esquerda, pois o FB do filho tem sinal igual
             } else {
                 printf("RDE(%d)\n",no->valor);
-                rde(arvore, no); //rotação dupla a esquerda, pois o FB do filho tem sinal diferente
+                rde(arvoreAVL, no); //rotação dupla a esquerda, pois o FB do filho tem sinal diferente
             }
         }
 
@@ -165,7 +163,7 @@ int fb(No* no) {
     return esquerda - direita;
 }
 
-No* rse(Arvore* arvore, No* no) {
+No* rse(ArvoreAVL* arvoreAVL, No* no) {
     contadora++;
     No* pai = no->pai;
     No* direita = no->direita;
@@ -177,7 +175,7 @@ No* rse(Arvore* arvore, No* no) {
     direita->pai = pai;
 
     if (pai == NULL) {
-        arvore->raiz = direita;
+        arvoreAVL->raiz = direita;
     } else {
         if (pai->esquerda == no) {
             pai->esquerda = direita;
@@ -189,7 +187,7 @@ No* rse(Arvore* arvore, No* no) {
     return direita;
 }
 
-No* rsd(Arvore* arvore, No* no) {
+No* rsd(ArvoreAVL* arvoreAVL, No* no) {
     contadora++;
     No* pai = no->pai;
     No* esquerda = no->esquerda;
@@ -201,7 +199,7 @@ No* rsd(Arvore* arvore, No* no) {
     esquerda->pai = pai;
 
     if (pai == NULL) {
-        arvore->raiz = esquerda;
+        arvoreAVL->raiz = esquerda;
     } else {
         if (pai->esquerda == no) {
             pai->esquerda = esquerda;
@@ -213,24 +211,12 @@ No* rsd(Arvore* arvore, No* no) {
     return esquerda;
 }
 
-No* rde(Arvore* arvore, No* no) {
-    no->direita = rsd(arvore, no->direita);
-    return rse(arvore, no);
+No* rde(ArvoreAVL* arvoreAVL, No* no) {
+    no->direita = rsd(arvoreAVL, no->direita);
+    return rse(arvoreAVL, no);
 }
 
-No* rdd(Arvore* arvore, No* no) {
-    no->esquerda = rse(arvore, no->esquerda);
-    return rsd(arvore, no);
-}
-
-int main() {
-    Arvore* a = criar();
-
-    for (int i = 1; i <= 7; i++) {
-        adicionar(a,i);  
-    }
-
-    printf("In-order: ");
-    percorrerProfundidadeInOrder(a->raiz,visitar);
-    printf("\n");
+No* rdd(ArvoreAVL* arvoreAVL, No* no) {
+    no->esquerda = rse(arvoreAVL, no->esquerda);
+    return rsd(arvoreAVL, no);
 }

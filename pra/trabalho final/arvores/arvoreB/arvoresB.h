@@ -20,4 +20,4 @@ void adicionaChaveNo(No*, No*, int);
 int transbordo(ArvoreB*,No*);
 No* divideNo(ArvoreB*, No*);
 void adicionaChaveRecursivo(ArvoreB*, No*, No*, int);
-void adicionaChave(ArvoreB*, int);
+int adicionaChave(ArvoreB*, int);

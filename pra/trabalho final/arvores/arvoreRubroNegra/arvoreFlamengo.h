@@ -9,20 +9,20 @@ typedef struct no {
     int valor;
 } No;
 
-typedef struct arvore {
+typedef struct arvoreRubroNegro {
     struct no* raiz;
     struct no* nulo; 
-} Arvore;
+} ArvoreRubroNegro;
  
 
 int contadora = 0;
 
-No* criarNo(Arvore*, No*, int);
-void balancear(Arvore*, No*);
-void rotacionarEsquerda(Arvore*, No*);
-void rotacionarDireita(Arvore*, No*);
+No* criarNo(ArvoreRubroNegro*, No*, int);
+void balancear(ArvoreRubroNegro*, No*);
+void rotacionarEsquerda(ArvoreRubroNegro*, No*);
+void rotacionarDireita(ArvoreRubroNegro*, No*);
 
-Arvore* criar();
-int vazia(Arvore*);
-No* adicionar(Arvore*, int);
-No* localizarArvoreB(Arvore* arvore, int valor);
+ArvoreRubroNegro* criarRubroNegra();
+int vaziaRubroNegra(ArvoreRubroNegro*);
+int adicionarRubroNegra(ArvoreRubroNegro*, int);
+No* localizarArvoreRubroNegroB(ArvoreRubroNegro*, int); 

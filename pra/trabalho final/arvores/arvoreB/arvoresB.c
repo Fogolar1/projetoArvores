@@ -160,27 +160,10 @@ void adicionaChaveRecursivo(ArvoreB* arvore, No* no, No* novo, int chave) {
     }
 }
 
-void adicionaChave(ArvoreB* arvore, int chave) {
+int adicionaChave(ArvoreB* arvore, int chave) {
     No* no = localizaNo(arvore, chave);
 
     adicionaChaveRecursivo(arvore, no, NULL, chave);
-}
 
-int main() {
-    ArvoreB* arvore = criaArvore(1);
-    
-    contador = 0;
-
-    adicionaChave(arvore, 12);
-    adicionaChave(arvore, 3);
-    adicionaChave(arvore, 5);
-    adicionaChave(arvore, 7);
-    adicionaChave(arvore, 15);
-    adicionaChave(arvore, 99);
-    adicionaChave(arvore, 1);
-
-    percorreArvore(arvore->raiz);
-
-    printf("\nNúmero de operações: %d\n", contador);
-
+    return contador;
 }
