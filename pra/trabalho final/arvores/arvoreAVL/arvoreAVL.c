@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include "arvoreAVL.h"
 
+/*
+Teste de commit
+*/
+
 ArvoreAVL* criar() {
     ArvoreAVL *arvoreAVL = malloc(sizeof(ArvoreAVL));
     arvoreAVL->raiz = NULL;
