@@ -46,7 +46,7 @@ void piorCaso(){
         execsArvoreB1 += adicionaChave(arvoreB1, i);
         execsArvoreB5 += adicionaChave(arvoreB5, i);
         execsArvoreB10 += adicionaChave(arvoreB10, i);
-        //execsArvoreAVL += adicionar(arvoreAVL, i);
+        execsArvoreAVL += adicionar(arvoreAVL, i);
         execsArvoreRubroNegra += adicionarRubroNegra(arvoreRubroNegro, i);
     }
 }

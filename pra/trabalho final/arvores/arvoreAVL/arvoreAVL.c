@@ -16,6 +16,7 @@ int vazia(ArvoreAVL* arvoreAVL) {
 }
 
 NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
+
     if (valor > no->valor) {
         if (no->direita == NULL) {
             printf("Adicionando %d\n",valor);
@@ -27,7 +28,7 @@ NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
 				
             return novo;
         } else {
-            printf("ta preso?");
+            //printf("ta preso?");
             return adicionarNoAVL(no->direita, valor);
         }
     } else {
@@ -41,7 +42,7 @@ NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
 			
             return novo;
         } else {
-            printf("ta preso2?");
+            //printf("ta preso2?");
             return adicionarNoAVL(no->esquerda, valor);
         }
     }
@@ -54,14 +55,25 @@ int adicionar(ArvoreAVL* arvoreAVL, int valor) {
         NoAVL* novo = malloc(sizeof(NoAVL));
         novo->valor = valor;
         
+        novo->direita = NULL;
+        novo->esquerda = NULL;
+        novo->pai = NULL;
+        
         arvoreAVL->raiz = novo;
     } else {
-        printf("Dentro da func");
+        //printf("Dentro da func");
+
         NoAVL* no = adicionarNoAVL(arvoreAVL->raiz, valor);
-        printf("Sai da func");
+
+        no->direita = NULL;
+        no->esquerda = NULL;
+
+        //printf("Sai da func");
+
         balanceamento(arvoreAVL, no);
-        printf("Sla");
+        //printf("Sla");
     }
+
 
     return contadoraAVL;
 }
