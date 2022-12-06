@@ -13,9 +13,6 @@ typedef struct arvoreRubroNegro {
     struct noRN* raiz;
     struct noRN* nulo; 
 } ArvoreRubroNegro;
- 
-
-int contadora = 0;
 
 NoRN* criarNo(ArvoreRubroNegro*, NoRN*, int);
 void balancear(ArvoreRubroNegro*, NoRN*);
@@ -25,4 +22,4 @@ void rotacionarDireita(ArvoreRubroNegro*, NoRN*);
 ArvoreRubroNegro* criarRubroNegra();
 int vaziaRubroNegra(ArvoreRubroNegro*);
 int adicionarRubroNegra(ArvoreRubroNegro*, int);
-NoRN* localizarArvoreRubroNegroB(ArvoreRubroNegro*, int); 
+NoRN* localizarArvoreRubroNegroB(ArvoreRubroNegro*, int);

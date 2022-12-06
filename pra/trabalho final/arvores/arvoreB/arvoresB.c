@@ -11,7 +11,7 @@ ArvoreB* criaArvore(int ordem) {
     return a;
 }
 
-int contador = 0;
+int contadoraB = 0;
 
 NoB* criaNo(ArvoreB* arvore) {
     int max = arvore->ordem * 2;
@@ -45,7 +45,7 @@ int pesquisaBinaria(NoB* no, int chave) {
     int inicio = 0, fim = no->total - 1, meio;		
     
     while (inicio <= fim) {	
-        contador++;
+        contadoraB++;
         
         meio = (inicio + fim) / 2;
         
@@ -80,7 +80,7 @@ NoB* localizaNo(ArvoreB* arvore, int chave) {
     NoB *no = arvore->raiz;
     
     while (no != NULL) {
-        contador++;
+        contadoraB++;
 
         int i = pesquisaBinaria(no, chave);
 
@@ -96,7 +96,7 @@ NoB* localizaNo(ArvoreB* arvore, int chave) {
 void adicionaChaveNo(NoB* no, NoB* novo, int chave) {
     int i = pesquisaBinaria(no, chave);
     
-    contador++;
+    contadoraB++;
 
     for (int j = no->total - 1; j >= i; j--) {
         no->chaves[j + 1] = no->chaves[j];
@@ -110,7 +110,7 @@ void adicionaChaveNo(NoB* no, NoB* novo, int chave) {
 }
 
 int transbordo(ArvoreB* arvore, NoB* no) {
-    contador++;
+    contadoraB++;
     
     return no->total > arvore->ordem * 2;
 }
@@ -120,7 +120,7 @@ NoB* divideNo(ArvoreB* arvore, NoB* no) {
     NoB* novo = criaNo(arvore);
     novo->pai = no->pai;
 
-    contador++;
+    contadoraB++;
     
     for (int i = meio + 1; i < no->total; i++) {
         novo->filhos[novo->total] = no->filhos[i];
@@ -137,7 +137,7 @@ NoB* divideNo(ArvoreB* arvore, NoB* no) {
 }
 
 void adicionaChaveRecursivo(ArvoreB* arvore, NoB* no, NoB* novo, int chave) {
-    contador++;
+    contadoraB++;
     
     adicionaChaveNo(no, novo, chave);
     
@@ -146,7 +146,7 @@ void adicionaChaveRecursivo(ArvoreB* arvore, NoB* no, NoB* novo, int chave) {
         NoB* novo = divideNo(arvore, no);
 
         if (no->pai == NULL) {
-            contador++;
+            contadoraB++;
             
             NoB* pai = criaNo(arvore);            
             pai->filhos[0] = no;
@@ -165,5 +165,5 @@ int adicionaChave(ArvoreB* arvore, int chave) {
 
     adicionaChaveRecursivo(arvore, no, NULL, chave);
 
-    return contador;
+    return contadoraB;
 }

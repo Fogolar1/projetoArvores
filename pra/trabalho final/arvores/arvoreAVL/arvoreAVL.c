@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "arvoreAVL.h"
 
+int contadoraAVL = 0;
+
 ArvoreAVL* criar() {
     ArvoreAVL *arvoreAVL = malloc(sizeof(ArvoreAVL));
     arvoreAVL->raiz = NULL;
@@ -13,7 +15,7 @@ int vazia(ArvoreAVL* arvoreAVL) {
     return arvoreAVL->raiz == NULL;
 }
 
-NoAVL* adicionarNo(NoAVL* no, int valor) {
+NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
     if (valor > no->valor) {
         if (no->direita == NULL) {
             printf("Adicionando %d\n",valor);
@@ -25,7 +27,8 @@ NoAVL* adicionarNo(NoAVL* no, int valor) {
 				
             return novo;
         } else {
-            return adicionarNo(no->direita, valor);
+            printf("ta preso?");
+            return adicionarNoAVL(no->direita, valor);
         }
     } else {
         if (no->esquerda == NULL) {
@@ -38,13 +41,14 @@ NoAVL* adicionarNo(NoAVL* no, int valor) {
 			
             return novo;
         } else {
-            return adicionarNo(no->esquerda, valor);
+            printf("ta preso2?");
+            return adicionarNoAVL(no->esquerda, valor);
         }
     }
 }
 
 int adicionar(ArvoreAVL* arvoreAVL, int valor) {
-    contadora++;
+    contadoraAVL++;
     if (arvoreAVL->raiz == NULL) {
         printf("Adicionando %d\n",valor);
         NoAVL* novo = malloc(sizeof(NoAVL));
@@ -52,11 +56,14 @@ int adicionar(ArvoreAVL* arvoreAVL, int valor) {
         
         arvoreAVL->raiz = novo;
     } else {
-        NoAVL* no = adicionarNo(arvoreAVL->raiz, valor);
+        printf("Dentro da func");
+        NoAVL* no = adicionarNoAVL(arvoreAVL->raiz, valor);
+        printf("Sai da func");
         balanceamento(arvoreAVL, no);
+        printf("Sla");
     }
 
-    return contadora;
+    return contadoraAVL;
 }
 
 
@@ -78,37 +85,37 @@ NoAVL* localizar(NoAVL* no, int valor) {
     return NULL;
 }
 
-void percorrerProfundidadeInOrder(NoAVL* no, void (*callback)(int)) {
+void percorrerProfundidadeInOrderAVL(NoAVL* no, void (*callback)(int)) {
     if (no != NULL) {
-        percorrerProfundidadeInOrder(no->esquerda,callback);
+        percorrerProfundidadeInOrderAVL(no->esquerda,callback);
         callback(no->valor);
-        percorrerProfundidadeInOrder(no->direita,callback);
+        percorrerProfundidadeInOrderAVL(no->direita,callback);
     }
 }
 
-void percorrerProfundidadePreOrder(NoAVL* no, void (*callback)(int)) {
+void percorrerProfundidadePreOrderAVL(NoAVL* no, void (*callback)(int)) {
     if (no != NULL) {
         callback(no->valor);
-        percorrerProfundidadePreOrder(no->esquerda,callback);
-        percorrerProfundidadePreOrder(no->direita,callback);
+        percorrerProfundidadePreOrderAVL(no->esquerda,callback);
+        percorrerProfundidadePreOrderAVL(no->direita,callback);
     }
 }
 
-void percorrerProfundidadePosOrder(NoAVL* no, void (callback)(int)) {
+void percorrerProfundidadePosOrderAVL(NoAVL* no, void (callback)(int)) {
     if (no != NULL) {
-        percorrerProfundidadePosOrder(no->esquerda,callback);
-        percorrerProfundidadePosOrder(no->direita,callback);
+        percorrerProfundidadePosOrderAVL(no->esquerda,callback);
+        percorrerProfundidadePosOrderAVL(no->direita,callback);
         callback(no->valor);
     }
 }
 
-void visitar(int valor){
+void visitarAVL(int valor){
     printf("%d ", valor);
 }
 
 void balanceamento(ArvoreAVL* arvoreAVL, NoAVL* no) {
     while (no != NULL) {
-        contadora++;
+        contadoraAVL++;
         int fator = fb(no);
 
         if (fator > 1) { //árvore mais pesada para esquerda
@@ -164,7 +171,7 @@ int fb(NoAVL* no) {
 }
 
 NoAVL* rse(ArvoreAVL* arvoreAVL, NoAVL* no) {
-    contadora++;
+    contadoraAVL++;
     NoAVL* pai = no->pai;
     NoAVL* direita = no->direita;
   
@@ -188,7 +195,7 @@ NoAVL* rse(ArvoreAVL* arvoreAVL, NoAVL* no) {
 }
 
 NoAVL* rsd(ArvoreAVL* arvoreAVL, NoAVL* no) {
-    contadora++;
+    contadoraAVL++;
     NoAVL* pai = no->pai;
     NoAVL* esquerda = no->esquerda;
   

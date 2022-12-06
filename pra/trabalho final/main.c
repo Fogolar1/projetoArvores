@@ -14,15 +14,6 @@ int execsArvoreAVL = 0;
 char* files[] = {"arvoreAVL", "arvoreB1", "arvoreB5", "arvoreB10",  "arvoreRubroNegra"};
 
 
-void main(){
-    for(int numExec = 0; numExec <= 1000; numExec++){
-        casoMedio();
-        
-        piorCaso();
-    }
-    
-
-}
 
 void casoMedio(){
     ArvoreAVL* arvoreAVL = criar();
@@ -33,10 +24,15 @@ void casoMedio(){
     for(int i = 0; i <= 10;i++){
         int numero = rand() % 1001;
         execsArvoreB1 += adicionaChave(arvoreB1, numero);
+        //printf("\nPrimeira");
         execsArvoreB5 += adicionaChave(arvoreB5, numero);
+        //printf("\nSegunda");
         execsArvoreB10 += adicionaChave(arvoreB10, numero);
+        //printf("\nTerceira");
         execsArvoreAVL += adicionar(arvoreAVL, numero);
+        //printf("\nQuarta");
         execsArvoreRubroNegra += adicionarRubroNegra(arvoreRubroNegro, numero);
+        //printf("\nQuinta");
     }
 }
 
@@ -50,7 +46,18 @@ void piorCaso(){
         execsArvoreB1 += adicionaChave(arvoreB1, i);
         execsArvoreB5 += adicionaChave(arvoreB5, i);
         execsArvoreB10 += adicionaChave(arvoreB10, i);
-        execsArvoreAVL += adicionar(arvoreAVL, i);
+        //execsArvoreAVL += adicionar(arvoreAVL, i);
         execsArvoreRubroNegra += adicionarRubroNegra(arvoreRubroNegro, i);
     }
+}
+
+void main(){
+    for(int numExec = 0; numExec <= 1000; numExec++){
+        casoMedio();
+        
+        piorCaso();
+
+    }
+    
+    printf("FOI");
 }
