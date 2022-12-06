@@ -1,23 +1,23 @@
-typedef struct no {
+typedef struct noB {
     int total;
     int* chaves;
-    struct no** filhos;
-    struct no* pai; 
-} No;
+    struct noB** filhos;
+    struct noB* pai; 
+} NoB;
 
 typedef struct arvoreB {
-  No* raiz;
+  NoB* raiz;
   int ordem;
 } ArvoreB;
 
 ArvoreB* criaArvore(int); 
-No* criaNo(ArvoreB*);
-void percorreArvore(No*);
-int pesquisaBinaria(No*, int);
+NoB* criaNo(ArvoreB*);
+void percorreArvore(NoB*);
+int pesquisaBinaria(NoB*, int);
 int localizaChave(ArvoreB*, int);
-No* localizaNo(ArvoreB*, int);
-void adicionaChaveNo(No*, No*, int);
-int transbordo(ArvoreB*,No*);
-No* divideNo(ArvoreB*, No*);
-void adicionaChaveRecursivo(ArvoreB*, No*, No*, int);
+NoB* localizaNo(ArvoreB*, int);
+void adicionaChaveNo(NoB*, NoB*, int);
+int transbordo(ArvoreB*,NoB*);
+NoB* divideNo(ArvoreB*, NoB*);
+void adicionaChaveRecursivo(ArvoreB*, NoB*, NoB*, int);
 int adicionaChave(ArvoreB*, int);

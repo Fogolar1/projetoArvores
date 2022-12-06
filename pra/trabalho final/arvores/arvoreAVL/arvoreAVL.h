@@ -1,29 +1,29 @@
 int contadora = 0;
 
-typedef struct no {
-    struct no* pai;
-    struct no* esquerda;
-    struct no* direita;
+typedef struct noAVL {
+    struct noAVL* pai;
+    struct noAVL* esquerda;
+    struct noAVL* direita;
     int valor;
-} No;
+} NoAVL;
 
 typedef struct arvoreAVL {
-    struct no* raiz;
+    struct noAVL* raiz;
 } ArvoreAVL;
 
 ArvoreAVL* criar();
 int vazia(ArvoreAVL* arvoreAVL);
-No* adicionarNo(No* no, int valor);
+NoAVL* adicionarNo(NoAVL* no, int valor);
 int adicionar(ArvoreAVL* arvoreAVL, int valor);
-No* localizar(No* no, int valor);
-void percorrerProfundidadeInOrder(No* no, void (*callback)(int));
-void percorrerProfundidadePreOrder(No* no, void (*callback)(int));
-void percorrerProfundidadePosOrder(No* no, void (callback)(int));
+NoAVL* localizar(NoAVL* no, int valor);
+void percorrerProfundidadeInOrder(NoAVL* no, void (*callback)(int));
+void percorrerProfundidadePreOrder(NoAVL* no, void (*callback)(int));
+void percorrerProfundidadePosOrder(NoAVL* no, void (callback)(int));
 void visitar(int valor);
-void balanceamento(ArvoreAVL*, No*);
-int altura(No*);
-int fb(No*);
-No* rsd(ArvoreAVL*, No*);
-No* rse(ArvoreAVL*, No*);
-No* rdd(ArvoreAVL*, No*);
-No* rde(ArvoreAVL*, No*);
+void balanceamento(ArvoreAVL*, NoAVL*);
+int altura(NoAVL*);
+int fb(NoAVL*);
+NoAVL* rsd(ArvoreAVL*, NoAVL*);
+NoAVL* rse(ArvoreAVL*, NoAVL*);
+NoAVL* rdd(ArvoreAVL*, NoAVL*);
+NoAVL* rde(ArvoreAVL*, NoAVL*);

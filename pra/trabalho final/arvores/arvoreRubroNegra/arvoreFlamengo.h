@@ -1,28 +1,28 @@
 enum coloracao { Vermelho, Preto };
 typedef enum coloracao Cor;
 
-typedef struct no {
-    struct no* pai;
-    struct no* esquerda;
-    struct no* direita;
+typedef struct noRN {
+    struct noRN* pai;
+    struct noRN* esquerda;
+    struct noRN* direita;
     Cor cor;
     int valor;
-} No;
+} NoRN;
 
 typedef struct arvoreRubroNegro {
-    struct no* raiz;
-    struct no* nulo; 
+    struct noRN* raiz;
+    struct noRN* nulo; 
 } ArvoreRubroNegro;
  
 
 int contadora = 0;
 
-No* criarNo(ArvoreRubroNegro*, No*, int);
-void balancear(ArvoreRubroNegro*, No*);
-void rotacionarEsquerda(ArvoreRubroNegro*, No*);
-void rotacionarDireita(ArvoreRubroNegro*, No*);
+NoRN* criarNo(ArvoreRubroNegro*, NoRN*, int);
+void balancear(ArvoreRubroNegro*, NoRN*);
+void rotacionarEsquerda(ArvoreRubroNegro*, NoRN*);
+void rotacionarDireita(ArvoreRubroNegro*, NoRN*);
 
 ArvoreRubroNegro* criarRubroNegra();
 int vaziaRubroNegra(ArvoreRubroNegro*);
 int adicionarRubroNegra(ArvoreRubroNegro*, int);
-No* localizarArvoreRubroNegroB(ArvoreRubroNegro*, int); 
+NoRN* localizarArvoreRubroNegroB(ArvoreRubroNegro*, int); 
