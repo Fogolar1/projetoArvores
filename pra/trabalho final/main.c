@@ -20,35 +20,44 @@ void salvar(FILE *nome_arquivo, int qntdExec){
 }
 
 void casoMedio(){
-    ArvoreAVL* arvoreAVL = criar();
-    ArvoreB* arvoreB1 = criaArvore(1);
-    ArvoreB* arvoreB5 = criaArvore(5);
-    ArvoreB* arvoreB10 = criaArvore(10);
-    ArvoreRubroNegro* arvoreRubroNegro = criarRubroNegra();
+    ArvoreAVL* arvoreAVL[10];
+    ArvoreB* arvoreB1[10];
+    ArvoreB* arvoreB5[10] ;
+    ArvoreB* arvoreB10[10];
+    ArvoreRubroNegro* arvoreRubroNegro[10];
+
+    for(int i=0; i <=10; i++){
+        arvoreRubroNegro[i] = criarRubroNegra();
+        arvoreB10[i] = criaArvore(10);
+        arvoreB5[i] = criaArvore(5);
+        arvoreB1[i] = criaArvore(1);
+        arvoreAVL[i] = criar();
+    }
 
     execsArvoreB1=0;
     execsArvoreB5=0;
     execsArvoreB10=0;
     execsArvoreAVL=0;
     execsArvoreRubroNegra=0;
+
+
     
     
     for(int i = 0; i <= 1000;i++){
-        int aux = 0;
+        int aux[5];
         for(int j = 0; j <=10; j++){
             int numero = rand() % 1001;
-            aux = adicionaChave(arvoreB1, numero);
-            execsArvoreB1 += aux;
-            execsArvoreB5 += adicionaChave(arvoreB5, numero);
-            execsArvoreB10 += adicionaChave(arvoreB10, numero);
-            execsArvoreAVL += adicionar(arvoreAVL, numero);
-            execsArvoreRubroNegra += adicionarRubroNegra(arvoreRubroNegro, numero);
+            aux[0] = adicionaChave(arvoreB1[j], numero);    
+            aux[1] += adicionaChave(arvoreB5[j], numero);
+            aux[2] += adicionaChave(arvoreB10[j], numero);
+            aux[3] += adicionar(arvoreAVL[j], numero);
+            aux[4] += adicionarRubroNegra(arvoreRubroNegro[j], numero);
         }
-        execsArvoreB1 = execsArvoreB1/10;
-        execsArvoreB5 = execsArvoreB5/10;
-        execsArvoreB10 = execsArvoreB10/10;
-        execsArvoreAVL = execsArvoreAVL/10;
-        execsArvoreRubroNegra = execsArvoreRubroNegra/10;
+        execsArvoreB1 = aux[0]/10;
+        execsArvoreB5 = aux[1]/10;
+        execsArvoreB10 = aux[2]/10;
+        execsArvoreAVL = aux[3]/10;
+        execsArvoreRubroNegra = aux[4]/10;
         salvar(saidaMedio, i);
     }
     
