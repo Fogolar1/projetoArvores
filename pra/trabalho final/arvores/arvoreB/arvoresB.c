@@ -34,7 +34,7 @@ void percorreArvore(NoB* no) {
         for (int i = 0; i < no->total; i++){
             percorreArvore(no->filhos[i]); //visita o filho a esquerda
             
-            printf("%d ",no->chaves[i]);
+            //printf("%d ",no->chaves[i]);
         }
 
         percorreArvore(no->filhos[no->total]); //visita ultimo filho (direita)
@@ -164,6 +164,6 @@ int adicionaChave(ArvoreB* arvore, int chave) {
     NoB* no = localizaNo(arvore, chave);
 
     adicionaChaveRecursivo(arvore, no, NULL, chave);
-
+    printf("\nContadora = %i",contadoraB);
     return contadoraB;
 }
