@@ -161,9 +161,9 @@ void adicionaChaveRecursivo(ArvoreB* arvore, NoB* no, NoB* novo, int chave) {
 }
 
 int adicionaChave(ArvoreB* arvore, int chave) {
+    //contadoraB=0;
     NoB* no = localizaNo(arvore, chave);
 
     adicionaChaveRecursivo(arvore, no, NULL, chave);
-    printf("\nContadora = %i",contadoraB);
     return contadoraB;
 }

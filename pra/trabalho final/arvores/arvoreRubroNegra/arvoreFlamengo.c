@@ -54,6 +54,7 @@ NoRN* adicionarNoRN(ArvoreRubroNegro* arvoreRubroNegro, NoRN* no, int valor) {
 }
 
 int adicionarRubroNegra(ArvoreRubroNegro* arvoreRubroNegro, int valor) {
+    //contadoraRN=0;
     if (vaziaRubroNegra(arvoreRubroNegro)) {
         arvoreRubroNegro->raiz = criarNo(arvoreRubroNegro, arvoreRubroNegro->nulo, valor);
         arvoreRubroNegro->raiz->cor = Preto;

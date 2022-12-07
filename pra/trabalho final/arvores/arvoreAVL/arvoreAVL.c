@@ -49,6 +49,7 @@ NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
 }
 
 int adicionar(ArvoreAVL* arvoreAVL, int valor) {
+    //contadoraAVL=0;
     contadoraAVL++;
     if (arvoreAVL->raiz == NULL) {
         printf("Adicionando %d\n",valor);
