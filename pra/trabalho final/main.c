@@ -16,7 +16,7 @@ FILE *saidaPior;
 
 void salvar(FILE *nome_arquivo, int qntdExec){
     printf("\nSalvei %i", qntdExec);
-    fprintf(nome_arquivo, "%i;%i;%i;%i;%i;%i\n", qntdExec, execsArvoreB1, execsArvoreB5, execsArvoreB10, execsArvoreRubroNegra, execsArvoreAVL);
+    fprintf(nome_arquivo, "%i;%i;%i;%i;%i\n", execsArvoreB1, execsArvoreB5, execsArvoreB10, execsArvoreRubroNegra, execsArvoreAVL);
 }
 
 void casoMedio(){
