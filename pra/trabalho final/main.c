@@ -27,10 +27,10 @@ void casoMedio(){
     ArvoreRubroNegro* arvoreRubroNegro[10];
 
     for(int i=0; i <=10; i++){
-        arvoreRubroNegro[i] = criarRubroNegra();
-        arvoreB10[i] = criaArvore(10);
-        arvoreB5[i] = criaArvore(5);
-        arvoreB1[i] = criaArvore(1);
+        //arvoreRubroNegro[i] = criarRubroNegra();
+        //arvoreB10[i] = criaArvore(10);
+        //arvoreB5[i] = criaArvore(5);
+        //arvoreB1[i] = criaArvore(1);
         arvoreAVL[i] = criar();
     }
 
@@ -43,21 +43,22 @@ void casoMedio(){
 
     
     
-    for(int i = 0; i <= 1000;i++){
+    for(int i = 0; i < 1000;i++){
         int aux[5];
-        for(int j = 0; j <=10; j++){
+        for(int j = 0; j <10; j++){
             int numero = rand() % 1001;
-            aux[0] = adicionaChave(arvoreB1[j], numero);    
-            aux[1] += adicionaChave(arvoreB5[j], numero);
-            aux[2] += adicionaChave(arvoreB10[j], numero);
+            //aux[0] = adicionaChave(arvoreB1[j], numero);    
+            //aux[1] += adicionaChave(arvoreB5[j], numero);
+            //aux[2] += adicionaChave(arvoreB10[j], numero);
             aux[3] += adicionar(arvoreAVL[j], numero);
-            aux[4] += adicionarRubroNegra(arvoreRubroNegro[j], numero);
+            //aux[4] += adicionarRubroNegra(arvoreRubroNegro[j], numero);
         }
-        execsArvoreB1 = aux[0]/10;
-        execsArvoreB5 = aux[1]/10;
-        execsArvoreB10 = aux[2]/10;
+        //execsArvoreB1 = aux[0]/10;
+        //execsArvoreB5 = aux[1]/10;
+        //execsArvoreB10 = aux[2]/10;
         execsArvoreAVL = aux[3]/10;
-        execsArvoreRubroNegra = aux[4]/10;
+        //execsArvoreRubroNegra = aux[4]/10;
+        printf("FOASE");
         salvar(saidaMedio, i);
     }
     

@@ -24,6 +24,9 @@ NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
             novo->valor = valor;
             novo->pai = no;
 
+            novo->direita = NULL;
+            novo->esquerda = NULL;
+
             no->direita = novo;
 				
             return novo;
@@ -37,6 +40,8 @@ NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
             NoAVL* novo = malloc(sizeof(NoAVL));
 			novo->valor = valor;
             novo->pai = no;
+            novo->direita = NULL;
+            novo->esquerda = NULL;
 			
             no->esquerda = novo;
 			
@@ -66,8 +71,8 @@ int adicionar(ArvoreAVL* arvoreAVL, int valor) {
 
         NoAVL* no = adicionarNoAVL(arvoreAVL->raiz, valor);
 
-        no->direita = NULL;
-        no->esquerda = NULL;
+        //no->direita = NULL;
+        //no->esquerda = NULL;
 
         //printf("Sai da func");
 
@@ -194,13 +199,21 @@ NoAVL* rse(ArvoreAVL* arvoreAVL, NoAVL* no) {
     direita->esquerda = no;
     direita->pai = pai;
 
-    if (pai == NULL) {
+    printf("\na");
+    if (pai == arvoreAVL->raiz) {
+        printf("\nb");
         arvoreAVL->raiz = direita;
+        printf("\nc");
     } else {
+        printf("\nd");
         if (pai->esquerda == no) {
+            printf("\ne");
             pai->esquerda = direita;
+            printf("\nf");
         } else {
+            printf("\ng");
             pai->direita = direita;
+            printf("\nh");
         }
     }
 
@@ -218,7 +231,7 @@ NoAVL* rsd(ArvoreAVL* arvoreAVL, NoAVL* no) {
     esquerda->direita = no;
     esquerda->pai = pai;
 
-    if (pai == NULL) {
+    if (pai == arvoreAVL->raiz) {
         arvoreAVL->raiz = esquerda;
     } else {
         if (pai->esquerda == no) {
