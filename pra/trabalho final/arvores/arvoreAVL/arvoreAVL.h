@@ -7,6 +7,7 @@ typedef struct noAVL {
 
 typedef struct arvoreAVL {
     struct noAVL* raiz;
+    int contadoraAVL;
 } ArvoreAVL;
 
 ArvoreAVL* criar();

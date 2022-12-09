@@ -12,6 +12,7 @@ typedef struct noRN {
 typedef struct arvoreRubroNegro {
     struct noRN* raiz;
     struct noRN* nulo; 
+    int contadoraRN;
 } ArvoreRubroNegro;
 
 NoRN* criarNo(ArvoreRubroNegro*, NoRN*, int);
