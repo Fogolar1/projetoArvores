@@ -8,11 +8,11 @@ ArvoreB* criaArvore(int ordem) {
     a->ordem = ordem;
     a->raiz = criaNo(a);
     a->contadoraB = 1;
-
     return a;
 }
 
 NoB* criaNo(ArvoreB* arvore) {
+    arvore->contadoraB++;
     int max = arvore->ordem * 2;
     NoB* no = malloc(sizeof(NoB));
 
@@ -33,7 +33,6 @@ void percorreArvore(NoB* no) {
         for (int i = 0; i < no->total; i++){
             percorreArvore(no->filhos[i]); //visita o filho a esquerda
             
-            //printf("%d ",no->chaves[i]);
         }
 
         percorreArvore(no->filhos[no->total]); //visita ultimo filho (direita)
@@ -42,9 +41,7 @@ void percorreArvore(NoB* no) {
 
 int pesquisaBinaria(NoB* no, int chave,ArvoreB* arvore) {
     int inicio = 0, fim = no->total - 1, meio;		
-    
     while (inicio <= fim) {	
-        arvore->contadoraB++;
         
         meio = (inicio + fim) / 2;
         
@@ -109,7 +106,6 @@ void adicionaChaveNo(NoB* no, NoB* novo, int chave, ArvoreB* arvore) {
 }
 
 int transbordo(ArvoreB* arvore, NoB* no) {
-    arvore->contadoraB++;
     
     return no->total > arvore->ordem * 2;
 }
@@ -118,8 +114,6 @@ NoB* divideNo(ArvoreB* arvore, NoB* no) {
     int meio = no->total / 2;
     NoB* novo = criaNo(arvore);
     novo->pai = no->pai;
-
-    arvore->contadoraB++;
     
     for (int i = meio + 1; i < no->total; i++) {
         novo->filhos[novo->total] = no->filhos[i];
@@ -145,8 +139,6 @@ void adicionaChaveRecursivo(ArvoreB* arvore, NoB* no, NoB* novo, int chave) {
         NoB* novo = divideNo(arvore, no);
 
         if (no->pai == NULL) {
-            arvore->contadoraB++;
-            
             NoB* pai = criaNo(arvore);            
             pai->filhos[0] = no;
             adicionaChaveNo(pai, novo, promovido, arvore);

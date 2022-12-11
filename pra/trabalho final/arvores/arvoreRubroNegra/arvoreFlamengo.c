@@ -110,7 +110,6 @@ void visitarRN(int valor){
 
 void balancear(ArvoreRubroNegro* arvoreRubroNegro, NoRN* no) {
     while (no->pai->cor == Vermelho) {
-        arvoreRubroNegro->contadoraRN++;
         if (no->pai == no->pai->pai->esquerda) {
             NoRN *tio = no->pai->pai->direita;
             

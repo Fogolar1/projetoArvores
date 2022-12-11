@@ -21,7 +21,7 @@ void percorrerProfundidadePosOrderAVL(NoAVL* no, void (callback)(int));
 void visitarAVL(int valor);
 void balanceamento(ArvoreAVL*, NoAVL*);
 int altura(NoAVL*);
-int fb(NoAVL*);
+int fb(NoAVL*, ArvoreAVL*);
 NoAVL* rsd(ArvoreAVL*, NoAVL*);
 NoAVL* rse(ArvoreAVL*, NoAVL*);
 NoAVL* rdd(ArvoreAVL*, NoAVL*);

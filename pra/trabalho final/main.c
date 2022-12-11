@@ -15,7 +15,6 @@ FILE *saidaMedio;
 FILE *saidaPior;
 
 void salvar(FILE *nome_arquivo, int qntdExec){
-    printf("\nSalvei %i", qntdExec);
     fprintf(nome_arquivo, "%i;%i;%i;%i;%i;%i\n", qntdExec, execsArvoreB1, execsArvoreB5, execsArvoreB10, execsArvoreRubroNegra, execsArvoreAVL);
 }
 
@@ -67,9 +66,6 @@ void casoMedio(){
             aux[3] += adicionar(arvoreAVL[j],  array[i][j]);
             aux[4] += adicionarRubroNegra(arvoreRubroNegro[j], array[i][j]);
         }
-        for(int i = 0; i < 5; i++){
-            printf("aux %i - %i \n", i, aux[i]);
-        }
         execsArvoreB1 = aux[0]/10;
         execsArvoreB5 = aux[1]/10;
         execsArvoreB10 = aux[2]/10;
@@ -114,7 +110,7 @@ void main(){
     casoMedio();
     piorCaso();
 
-    printf("FOI");
+    printf("Executei");
 
     fclose(saidaMedio);
     fclose(saidaPior);

@@ -13,10 +13,10 @@ int vazia(ArvoreAVL* arvoreAVL) {
     return arvoreAVL->raiz == NULL;
 }
 
-NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
+NoAVL* adicionarNoAVL(NoAVL* no, int valor, ArvoreAVL* arvoreAVL) {
+    arvoreAVL->contadoraAVL++;
     if (valor > no->valor) {
         if (no->direita == NULL) {
-            printf("Adicionando %d\n",valor);
             NoAVL* novo = malloc(sizeof(NoAVL));
             novo->valor = valor;
             novo->pai = no;
@@ -28,11 +28,10 @@ NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
 				
             return novo;
         } else {
-            return adicionarNoAVL(no->direita, valor);
+            return adicionarNoAVL(no->direita, valor, arvoreAVL);
         }
     } else {
         if (no->esquerda == NULL) {
-            printf("Adicionando %d\n",valor);
             NoAVL* novo = malloc(sizeof(NoAVL));
 			novo->valor = valor;
             novo->pai = no;
@@ -43,15 +42,15 @@ NoAVL* adicionarNoAVL(NoAVL* no, int valor) {
 			
             return novo;
         } else {
-            return adicionarNoAVL(no->esquerda, valor);
+            return adicionarNoAVL(no->esquerda, valor, arvoreAVL);
         }
     }
 }
 
 int adicionar(ArvoreAVL* arvoreAVL, int valor) {
-    arvoreAVL->contadoraAVL++;
+    
     if (arvoreAVL->raiz == NULL) {
-        printf("Adicionando %d\n",valor);
+        arvoreAVL->contadoraAVL++;
         NoAVL* novo = malloc(sizeof(NoAVL));
         novo->valor = valor;
         novo->pai = NULL;
@@ -60,7 +59,8 @@ int adicionar(ArvoreAVL* arvoreAVL, int valor) {
         
         arvoreAVL->raiz = novo;
     } else {
-        NoAVL* no = adicionarNoAVL(arvoreAVL->raiz, valor);
+        arvoreAVL->contadoraAVL++;
+        NoAVL* no = adicionarNoAVL(arvoreAVL->raiz, valor, arvoreAVL);
         balanceamento(arvoreAVL, no);
     }
 
@@ -68,7 +68,7 @@ int adicionar(ArvoreAVL* arvoreAVL, int valor) {
 }
 
 
-NoAVL* localizar(NoAVL* no, int valor) {
+/*NoAVL* localizar(NoAVL* no, int valor) {
     if (no->valor == valor) {
         return no;
     } else {
@@ -84,57 +84,25 @@ NoAVL* localizar(NoAVL* no, int valor) {
     }
 
     return NULL;
-}
-
-void percorrerProfundidadeInOrderAVL(NoAVL* no, void (*callback)(int)) {
-    if (no != NULL) {
-        percorrerProfundidadeInOrderAVL(no->esquerda,callback);
-        callback(no->valor);
-        percorrerProfundidadeInOrderAVL(no->direita,callback);
-    }
-}
-
-void percorrerProfundidadePreOrderAVL(NoAVL* no, void (*callback)(int)) {
-    if (no != NULL) {
-        callback(no->valor);
-        percorrerProfundidadePreOrderAVL(no->esquerda,callback);
-        percorrerProfundidadePreOrderAVL(no->direita,callback);
-    }
-}
-
-void percorrerProfundidadePosOrderAVL(NoAVL* no, void (callback)(int)) {
-    if (no != NULL) {
-        percorrerProfundidadePosOrderAVL(no->esquerda,callback);
-        percorrerProfundidadePosOrderAVL(no->direita,callback);
-        callback(no->valor);
-    }
-}
-
-void visitarAVL(int valor){
-    printf("%d ", valor);
-}
+}*/
 
 void balanceamento(ArvoreAVL* arvoreAVL, NoAVL* no) {
     while (no != NULL) {
         arvoreAVL->contadoraAVL++;
-        int fator = fb(no);
+        int fator = fb(no, arvoreAVL);
 
         if (fator > 1) { //árvore mais pesada para esquerda
             //rotação para a direita
-            if (fb(no->esquerda) > 0) {
-                printf("RSD(%d)\n",no->valor);
+            if (fb(no->esquerda, arvoreAVL) > 0) {
                 rsd(arvoreAVL, no); //rotação simples a direita, pois o FB do filho tem sinal igual
             } else {
-                printf("RDD(%d)\n",no->valor);
                 rdd(arvoreAVL, no); //rotação dupla a direita, pois o FB do filho tem sinal diferente
             }
         } else if (fator < -1) { //árvore mais pesada para a direita
             //rotação para a esquerda
-            if (fb(no->direita) < 0) {
-                printf("RSE(%d)\n",no->valor);
+            if (fb(no->direita, arvoreAVL) < 0) {
                 rse(arvoreAVL, no); //rotação simples a esquerda, pois o FB do filho tem sinal igual
             } else {
-                printf("RDE(%d)\n",no->valor);
                 rde(arvoreAVL, no); //rotação dupla a esquerda, pois o FB do filho tem sinal diferente
             }
         }
@@ -157,7 +125,8 @@ int altura(NoAVL* no){
     return esquerda > direita ? esquerda : direita; //max(esquerda,direita)
 }
 
-int fb(NoAVL* no) {
+int fb(NoAVL* no, ArvoreAVL* arvoreAVL) {
+    arvoreAVL->contadoraAVL++;
     int esquerda = 0,direita = 0;
   
     if (no->esquerda != NULL) {
@@ -228,11 +197,13 @@ NoAVL* rsd(ArvoreAVL* arvoreAVL, NoAVL* no) {
 }
 
 NoAVL* rde(ArvoreAVL* arvoreAVL, NoAVL* no) {
+    arvoreAVL->contadoraAVL++;
     no->direita = rsd(arvoreAVL, no->direita);
     return rse(arvoreAVL, no);
 }
 
 NoAVL* rdd(ArvoreAVL* arvoreAVL, NoAVL* no) {
+    arvoreAVL->contadoraAVL++;
     no->esquerda = rse(arvoreAVL, no->esquerda);
     return rsd(arvoreAVL, no);
 }
