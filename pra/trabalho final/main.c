@@ -56,6 +56,7 @@ void casoMedio(){
     execsArvoreB10=0;
     execsArvoreAVL=0;
     execsArvoreRubroNegra=0;
+    int neymar = 0;
     
     for(int i = 0; i < 1000;i++){
         int aux[5];
@@ -71,7 +72,6 @@ void casoMedio(){
         execsArvoreB10 = aux[2]/10;
         execsArvoreAVL = aux[3]/10;
         execsArvoreRubroNegra = aux[4]/10;
-        int neymar;
         salvar(saidaMedio, i);
     }
     
@@ -89,6 +89,7 @@ void piorCaso(){
     execsArvoreB10=0;
     execsArvoreAVL=0;
     execsArvoreRubroNegra=0;
+    int ney;
 
     for(int numExec=0; numExec < 1000; numExec++){
         execsArvoreB1 += adicionaChave(arvoreB1, numExec);
@@ -96,6 +97,8 @@ void piorCaso(){
         execsArvoreB10 += adicionaChave(arvoreB10, numExec);
         execsArvoreAVL += adicionar(arvoreAVL, numExec);
         execsArvoreRubroNegra += adicionarRubroNegra(arvoreRubroNegro, numExec);
+        //printf("\nNey = %i", execsArvoreAVL);
+        //scanf("%i", &ney);
         salvar(saidaPior, numExec);
     }
 

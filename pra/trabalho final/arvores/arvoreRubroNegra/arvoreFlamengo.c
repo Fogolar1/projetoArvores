@@ -29,7 +29,7 @@ NoRN* criarNo(ArvoreRubroNegro* arvoreRubroNegro, NoRN* pai, int valor) {
 }
 
 NoRN* adicionarNoRN(ArvoreRubroNegro* arvoreRubroNegro, NoRN* no, int valor) {
-    arvoreRubroNegro->contadoraRN++;
+    
     if (valor > no->valor) {
         if (no->direita == arvoreRubroNegro->nulo) {
             no->direita = criarNo(arvoreRubroNegro, no, valor);     
@@ -37,6 +37,7 @@ NoRN* adicionarNoRN(ArvoreRubroNegro* arvoreRubroNegro, NoRN* no, int valor) {
         		
             return no->direita;
         } else {
+            arvoreRubroNegro->contadoraRN++;
             return adicionarNoRN(arvoreRubroNegro, no->direita, valor);
         }
     } else {
@@ -46,12 +47,14 @@ NoRN* adicionarNoRN(ArvoreRubroNegro* arvoreRubroNegro, NoRN* no, int valor) {
             
             return no->esquerda;
         } else {
+            arvoreRubroNegro->contadoraRN++;
             return adicionarNoRN(arvoreRubroNegro, no->esquerda, valor);
         }
     }
 }
 
 int adicionarRubroNegra(ArvoreRubroNegro* arvoreRubroNegro, int valor) {
+    arvoreRubroNegro->contadoraRN = 1;
     if (vaziaRubroNegra(arvoreRubroNegro)) {
         arvoreRubroNegro->raiz = criarNo(arvoreRubroNegro, arvoreRubroNegro->nulo, valor);
         arvoreRubroNegro->raiz->cor = Preto;
@@ -110,6 +113,7 @@ void visitarRN(int valor){
 
 void balancear(ArvoreRubroNegro* arvoreRubroNegro, NoRN* no) {
     while (no->pai->cor == Vermelho) {
+        arvoreRubroNegro->contadoraRN++;
         if (no->pai == no->pai->pai->esquerda) {
             NoRN *tio = no->pai->pai->direita;
             

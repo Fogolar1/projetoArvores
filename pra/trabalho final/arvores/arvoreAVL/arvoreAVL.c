@@ -15,6 +15,7 @@ int vazia(ArvoreAVL* arvoreAVL) {
 
 NoAVL* adicionarNoAVL(NoAVL* no, int valor, ArvoreAVL* arvoreAVL) {
     arvoreAVL->contadoraAVL++;
+    //printf("\nExecutei adicionarNoAVL %i", arvoreAVL->contadoraAVL);
     if (valor > no->valor) {
         if (no->direita == NULL) {
             NoAVL* novo = malloc(sizeof(NoAVL));
@@ -48,9 +49,11 @@ NoAVL* adicionarNoAVL(NoAVL* no, int valor, ArvoreAVL* arvoreAVL) {
 }
 
 int adicionar(ArvoreAVL* arvoreAVL, int valor) {
-    
+    arvoreAVL->contadoraAVL = 1;
+    //printf("\nExecutei adicionar1 %i", arvoreAVL->contadoraAVL);
     if (arvoreAVL->raiz == NULL) {
         arvoreAVL->contadoraAVL++;
+        //printf("\nExecutei adicionar2 %i", arvoreAVL->contadoraAVL);
         NoAVL* novo = malloc(sizeof(NoAVL));
         novo->valor = valor;
         novo->pai = NULL;
@@ -60,6 +63,7 @@ int adicionar(ArvoreAVL* arvoreAVL, int valor) {
         arvoreAVL->raiz = novo;
     } else {
         arvoreAVL->contadoraAVL++;
+        //printf("\nExecutei adicionar3 %i", arvoreAVL->contadoraAVL);
         NoAVL* no = adicionarNoAVL(arvoreAVL->raiz, valor, arvoreAVL);
         balanceamento(arvoreAVL, no);
     }
@@ -89,6 +93,7 @@ int adicionar(ArvoreAVL* arvoreAVL, int valor) {
 void balanceamento(ArvoreAVL* arvoreAVL, NoAVL* no) {
     while (no != NULL) {
         arvoreAVL->contadoraAVL++;
+        //printf("\nExecutei balanceamento %i", arvoreAVL->contadoraAVL);
         int fator = fb(no, arvoreAVL);
 
         if (fator > 1) { //árvore mais pesada para esquerda
@@ -111,15 +116,17 @@ void balanceamento(ArvoreAVL* arvoreAVL, NoAVL* no) {
     }
 }
 
-int altura(NoAVL* no){
+int altura(NoAVL* no, ArvoreAVL* arvoreAVL){
     int esquerda = 0,direita = 0;
+    //arvoreAVL->contadoraAVL++;
+    //printf("\nExecutei altura %i", arvoreAVL->contadoraAVL);
 
     if (no->esquerda != NULL) {
-        esquerda = altura(no->esquerda) + 1;
+        esquerda = altura(no->esquerda, arvoreAVL) + 1;
     }
 
     if (no->direita != NULL) {
-        direita = altura(no->direita) + 1;
+        direita = altura(no->direita, arvoreAVL) + 1;
     }
   
     return esquerda > direita ? esquerda : direita; //max(esquerda,direita)
@@ -127,14 +134,15 @@ int altura(NoAVL* no){
 
 int fb(NoAVL* no, ArvoreAVL* arvoreAVL) {
     arvoreAVL->contadoraAVL++;
+    //printf("\nExecutei fb %i", arvoreAVL->contadoraAVL);
     int esquerda = 0,direita = 0;
   
     if (no->esquerda != NULL) {
-        esquerda = altura(no->esquerda) + 1;
+        esquerda = altura(no->esquerda, arvoreAVL) + 1;
     }
 
     if (no->direita != NULL) {
-        direita = altura(no->direita) + 1;
+        direita = altura(no->direita, arvoreAVL) + 1;
     }
   
     return esquerda - direita;
@@ -142,6 +150,7 @@ int fb(NoAVL* no, ArvoreAVL* arvoreAVL) {
 
 NoAVL* rse(ArvoreAVL* arvoreAVL, NoAVL* no) {
     arvoreAVL->contadoraAVL++;
+    //printf("\nExecutei rse %i", arvoreAVL->contadoraAVL);
     NoAVL* pai = no->pai;
     NoAVL* direita = no->direita;
 
@@ -170,6 +179,7 @@ NoAVL* rse(ArvoreAVL* arvoreAVL, NoAVL* no) {
 
 NoAVL* rsd(ArvoreAVL* arvoreAVL, NoAVL* no) {
     arvoreAVL->contadoraAVL++;
+    //printf("\nExecutei rsd %i", arvoreAVL->contadoraAVL);
     NoAVL* pai = no->pai;
     NoAVL* esquerda = no->esquerda;
 
@@ -198,12 +208,14 @@ NoAVL* rsd(ArvoreAVL* arvoreAVL, NoAVL* no) {
 
 NoAVL* rde(ArvoreAVL* arvoreAVL, NoAVL* no) {
     arvoreAVL->contadoraAVL++;
+    //printf("\nExecutei rde %i", arvoreAVL->contadoraAVL);
     no->direita = rsd(arvoreAVL, no->direita);
     return rse(arvoreAVL, no);
 }
 
 NoAVL* rdd(ArvoreAVL* arvoreAVL, NoAVL* no) {
     arvoreAVL->contadoraAVL++;
+    //printf("\nExecutei rdd %i", arvoreAVL->contadoraAVL);
     no->esquerda = rse(arvoreAVL, no->esquerda);
     return rsd(arvoreAVL, no);
 }

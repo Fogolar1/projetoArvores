@@ -106,7 +106,7 @@ void adicionaChaveNo(NoB* no, NoB* novo, int chave, ArvoreB* arvore) {
 }
 
 int transbordo(ArvoreB* arvore, NoB* no) {
-    
+    arvore->contadoraB++;
     return no->total > arvore->ordem * 2;
 }
 
@@ -114,6 +114,7 @@ NoB* divideNo(ArvoreB* arvore, NoB* no) {
     int meio = no->total / 2;
     NoB* novo = criaNo(arvore);
     novo->pai = no->pai;
+    arvore->contadoraB++;
     
     for (int i = meio + 1; i < no->total; i++) {
         novo->filhos[novo->total] = no->filhos[i];
@@ -152,6 +153,7 @@ void adicionaChaveRecursivo(ArvoreB* arvore, NoB* no, NoB* novo, int chave) {
 }
 
 int adicionaChave(ArvoreB* arvore, int chave) {
+    arvore->contadoraB = 1;
     NoB* no = localizaNo(arvore, chave);
 
     adicionaChaveRecursivo(arvore, no, NULL, chave);
